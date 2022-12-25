@@ -1,5 +1,6 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script>
       $.ajaxSetup({
         headers: {
@@ -18,13 +19,14 @@
              let tableData = " ";
               $.each(response, function(key,value){
                 //  console.log(value.name);
+                key = key+1;
                 tableData +=  "<tr>";
-                tableData +=  "<td>"+value.id+"</td>";
+                tableData +=  "<td>"+ key +"</td>";
                 tableData +=  "<td>"+value.name+"</td>";
                 tableData +=  "<td>"+value.price+"</td>";
                 tableData +=  "<td>";
                 tableData +=  "<button class='btn btn-primary' id='editProduct' data-bs-toggle='modal' data-bs-target='#updateProductModal' data-id='"+value.id+"' data-name='"+value.name+"' data-price='"+value.price+"'>Edit</button>";
-                tableData +=  "<button class='btn btn-danger ms-2'>Delete</button>";
+                tableData +=  "<button class='btn btn-danger ms-2' id='deleteProduct' data-id='"+value.id+"'>Delete</button>";
                 tableData +=  "</td>";
                 tableData +=  "</tr>";
               })
@@ -48,9 +50,8 @@
               if(response.status == 'success'){
                 $('#createProductModal').modal('hide');
                 $('#createProductForm')[0].reset();
-                // $('#productTable').load(location.herf + ' #productTable');
                 getAllData();
-                
+                Command: toastr["success"]("Product created Successfully !")
               }
               
             }, error:function(error){
@@ -94,7 +95,7 @@
                 $('#updateProductForm')[0].reset();
                 // $('#productTable').load(location.herf + ' #productTable');
                 getAllData();
-                
+                Command: toastr["info"]("Product Updated Successfully !")
               }
               
             }, error:function(error){
@@ -106,6 +107,31 @@
               })
             }
         }); // Ajax end
+
+      });
+
+
+       // delete data
+       $(document).on('click', '#deleteProduct', function(e){
+        e.preventDefault();
+        let productId = $(this).data('id');
+
+        if(confirm("Are You Want To Delete This ?")){
+          $.ajax({
+            url: "{{ route('deleteProduct') }}",
+            method: "DELETE",
+            data:{id: productId},
+            dataType: "JSON",
+            success:function(response){
+              if(response.status == 'success'){
+                getAllData();
+                Command: toastr["info"]("Product Deleted Successfully !")
+
+              }
+              
+            }
+        }); // Ajax end
+        }
 
       });
     </script>

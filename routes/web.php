@@ -8,4 +8,5 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/create-product', 'createProduct')->name('createProduct');
     Route::get('/get-data', 'getProduct')->name('getProduct');
     Route::put('/update-data', 'updateProduct')->name('updateProduct');
+    Route::delete('/delete-data', 'deleteProduct')->name('deleteProduct');
 });

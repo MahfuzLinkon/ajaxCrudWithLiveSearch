@@ -7,6 +7,8 @@
     <title>Manage Products With Ajax</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
   </head>
   <body>
       <section class="py-5">
@@ -39,17 +41,7 @@
                         </tr>
                       </thead>
                       <tbody id="table">
-                        {{-- @foreach ($products as $product)
-                        <tr>
-                          <th>{{ $loop->iteration }}</th>
-                          <td>{{ $product->name }}</td>
-                          <td>{{ $product->price }}</td>
-                          <td class="text-center">
-                            <a href="" class="btn btn-primary"><i class="las la-edit"></i></a>
-                            <a href="" class="btn btn-danger"><i class="las la-trash"></i></a>
-                          </td>
-                        </tr>
-                        @endforeach --}}
+                       
                       </tbody>
                     </table>
                   </div>
@@ -64,5 +56,6 @@
 
       {{-- Script --}}
       @include('_inc.script')
+      {!! Toastr::message() !!}
   </body>
 </html>
