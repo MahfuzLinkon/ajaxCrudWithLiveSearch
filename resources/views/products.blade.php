@@ -23,27 +23,27 @@
                 <div class="card-body">
                   <div class="">
                    
-                    <div>
-                      <div class="col-md-8 float-start"></div>
-                      <div class="col-md-4">
-                        <!-- Button trigger modal Create -->
-                        <a href="#createProductModal" class="btn btn-success mb-3 " data-bs-toggle="modal">Create Product</a>
-                      </div>
+                    <div class="">
+                       <!-- Button trigger modal Create -->
+                      <a href="#createProductModal" class="btn btn-success mb-3 " data-bs-toggle="modal">Create Product</a>
+                      <input type="text" name="search" id="search" placeholder="Search here..." class="form-control mb-3">
                     </div>
-
-                    <table id="productTable" class="table table-striped table-hover table-bordered">
-                      <thead>
-                        <tr class="text-center">
-                          <th scope="col">#</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Price</th>
-                          <th scope="col" width="20%" >Action</th>
-                        </tr>
-                      </thead>
-                      <tbody id="table">
-                       
-                      </tbody>
-                    </table>
+                    <p id="searchInfo"></p>
+                    <div id="tableData">
+                      <table id="productTable" class="table table-striped table-hover table-bordered">
+                        <thead>
+                          <tr class="text-center">
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col" width="20%" >Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="table">
+                         
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -28,7 +28,7 @@ class ProductController extends Controller
     }
 
     public function getProduct(){
-        $products = Product::all();
+        $products = Product::orderBy('id', 'DESC')->get();
         return response()->json($products);
     }
 
@@ -56,7 +56,19 @@ class ProductController extends Controller
         ]);
     }
 
-
+    public function searchProduct(Request $request){
+        $searchProduct = Product::where('name', 'like', '%'.$request->searchProduct.'%')
+        ->orWhere('price', 'like', '%'.$request->searchProduct.'%')
+        ->orderBy('id', 'DESC')
+        ->get();
+        if($searchProduct->count() >=1){
+            return  response()->json($searchProduct);
+        }else{
+            return response()->json([
+                'status' => 'Nothing found',
+            ]);
+        }
+    }
 
 
 

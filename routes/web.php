@@ -9,4 +9,5 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('/get-data', 'getProduct')->name('getProduct');
     Route::put('/update-data', 'updateProduct')->name('updateProduct');
     Route::delete('/delete-data', 'deleteProduct')->name('deleteProduct');
+    Route::get('/search-data', 'searchProduct')->name('searchProduct');
 });

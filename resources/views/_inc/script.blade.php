@@ -134,4 +134,43 @@
         }
 
       });
+
+      $(document).on('keyup', '#search', function(e){
+        e.preventDefault();
+        let searchProduct = $('#search').val();
+        
+        $.ajax({
+          url: "{{ route('searchProduct') }}",
+          method: "GET",
+          dataType: "JSON",
+          data: {searchProduct: searchProduct},
+          success: function(response){
+            let tableData = " ";
+              $.each(response, function(key,value){
+                //  console.log(value.name);
+                key = key+1;
+                tableData +=  "<tr>";
+                tableData +=  "<td>"+ key +"</td>";
+                tableData +=  "<td>"+value.name+"</td>";
+                tableData +=  "<td>"+value.price+"</td>";
+                tableData +=  "<td>";
+                tableData +=  "<button class='btn btn-primary' id='editProduct' data-bs-toggle='modal' data-bs-target='#updateProductModal' data-id='"+value.id+"' data-name='"+value.name+"' data-price='"+value.price+"'>Edit</button>";
+                tableData +=  "<button class='btn btn-danger ms-2' id='deleteProduct' data-id='"+value.id+"'>Delete</button>";
+                tableData +=  "</td>";
+                tableData +=  "</tr>";
+              })
+              if(response.status == 'Nothing found'){
+                $('#table').html('<p class="text-info">Nothing found</p>');
+              }else(
+                $('#table').html(tableData)
+              )
+              
+          }
+        });
+      });
+
+
+
+
+
     </script>
